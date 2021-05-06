@@ -1,0 +1,6 @@
+netns:
+unshare --net <>
+$$ is curproc
+ls -la /proc/thread-self/ns
+or readlink !!
+ip netns add/attach/delete/identify/list

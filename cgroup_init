@@ -1,0 +1,27 @@
+# have users: root, andy
+https://git.kernel.org/pub/scm/linux/kernel/git/tj/cgroup.git/tree/Documentation/admin-guide/cgroup-v2.rst
+
+cd /sys/fs/cgroup/
+mkdir -p cont-test
+cd cont-test
+
+# delegating control to andy
+
+sudo chown andy cgroup.procs
+sudo chown andy cgroup.subtree_control
+
+# can check which controllers can we use here
+
+cat cgroup.controllers
+
+# have only memory and pids inherited from outside cgroup by default
+# but its enough for now (can enable other with writing to cgroup.subtree_control as root)
+# can enable them if going for nested containers
+
+echo "+memory +pids" > cgroup.subtree.control
+
+!!!! do not forget to invert back to memory pids
+
+Memory: controlling memory.high, in bytes
+Pids: pids.max, obv
+Cpu:
